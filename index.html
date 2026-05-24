@@ -348,15 +348,48 @@
         `${kecamatan.name},
         ${kabupaten.name},
         ${provinsi.name}`;
-      const hijriyah =
+      const hijriyahFormatter =
         new Intl.DateTimeFormat(
-          "id-ID-u-ca-islamic-umalqura",
+          "ar-SA-u-ca-islamic",
           {
             day: "numeric",
             month: "long",
             year: "numeric"
           }
-        ).format(lahir);
+        );
+      const hijriyahParts =
+        hijriyahFormatter.formatToParts(lahir);
+      const bulanHijriyahMap = {
+        "محرم": "Muharram",
+        "صفر": "Safar",
+        "ربيع الأول": "Rabiul Awal",
+        "ربيع الآخر": "Rabiul Akhir",
+        "جمادى الأولى": "Jumadil Awal",
+        "جمادى الآخرة": "Jumadil Akhir",
+        "رجب": "Rajab",
+        "شعبان": "Syaban",
+        "رمضان": "Ramadhan",
+        "شوال": "Syawal",
+        "ذو القعدة": "Dzulqa'dah",
+        "ذو الحجة": "Dzulhijjah"
+      };
+      let hariHijriyah = "";
+      let bulanHijriyahText = "";
+      let tahunHijriyahText = "";
+      hijriyahParts.forEach(part => {
+        if(part.type === "day"){
+          hariHijriyah = part.value;
+        }
+        if(part.type === "month"){
+          bulanHijriyahText =
+            bulanHijriyahMap[part.value] || part.value;
+        }
+        if(part.type === "year"){
+          tahunHijriyahText = part.value;
+        }
+      });
+      const hijriyah =
+        `${hariHijriyah} ${bulanHijriyahText} ${tahunHijriyahText} H`;
       const namaHari = [
         "Minggu",
         "Senin",
