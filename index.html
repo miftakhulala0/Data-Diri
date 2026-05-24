@@ -2,23 +2,20 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Generator NIK Simulasi</title>
   <style>
-    *{
+    * {
       box-sizing: border-box;
     }
-    body{
+    body {
       margin: 0;
       padding: 25px;
       background: #f5f5f5;
       font-family: Arial, sans-serif;
       color: #222;
     }
-    .container{
+    .container {
       max-width: 1200px;
       margin: auto;
       display: flex;
@@ -26,26 +23,26 @@
       align-items: flex-start;
     }
     .input-box,
-    .output-box{
+    .output-box {
       background: white;
       border-radius: 18px;
       padding: 25px;
       box-shadow: 0 0 15px rgba(0,0,0,0.08);
     }
-    .input-box{
+    .input-box {
       width: 35%;
       position: sticky;
       top: 20px;
     }
-    .output-box{
+    .output-box {
       width: 65%;
     }
-    h2{
+    h2 {
       margin-top: 0;
       margin-bottom: 20px;
       text-align: center;
     }
-    .info{
+    .info {
       margin-bottom: 25px;
       padding: 14px;
       border-radius: 10px;
@@ -53,16 +50,16 @@
       font-size: 14px;
       line-height: 1.6;
     }
-    .form-group{
+    .form-group {
       margin-bottom: 18px;
     }
-    label{
+    label {
       display: block;
       margin-bottom: 8px;
       font-weight: bold;
     }
     input,
-    select{
+    select {
       width: 100%;
       padding: 12px;
       border: 1px solid #ccc;
@@ -70,48 +67,48 @@
       font-size: 14px;
       background: white;
     }
-    input:disabled{
+    input:disabled {
       background: #eee;
     }
-    table{
+    table {
       width: 100%;
       border-collapse: collapse;
     }
-    td{
+    td {
       border: 1px solid #ddd;
       padding: 12px;
       vertical-align: top;
     }
-    td:first-child{
+    td:first-child {
       width: 35%;
       background: #fafafa;
       font-weight: bold;
     }
-    .nik{
+    .nik {
       font-size: 20px;
       font-weight: bold;
       letter-spacing: 2px;
       word-break: break-word;
     }
-    @media(max-width: 900px){
-      body{
+    @media(max-width:900px) {
+      body {
         padding: 15px;
       }
-      .container{
+      .container {
         flex-direction: column;
       }
       .input-box,
-      .output-box{
+      .output-box {
         width: 100%;
       }
-      .input-box{
+      .input-box {
         position: static;
       }
-      td{
+      td {
         display: block;
         width: 100%;
       }
-      td:first-child{
+      td:first-child {
         border-bottom: none;
       }
     }
@@ -126,39 +123,22 @@
       </div>
       <div class="form-group">
         <label>Provinsi</label>
-        <input
-          list="listProvinsi"
-          id="provinsi"
-          placeholder="Ketik nama provinsi"
-        />
+        <input list="listProvinsi" id="provinsi" placeholder="Ketik nama provinsi">
         <datalist id="listProvinsi"></datalist>
       </div>
       <div class="form-group">
         <label>Kabupaten / Kota</label>
-        <input
-          list="listKabupaten"
-          id="kabupaten"
-          placeholder="Ketik nama kabupaten"
-          disabled
-        />
+        <input list="listKabupaten" id="kabupaten" placeholder="Ketik nama kabupaten" disabled>
         <datalist id="listKabupaten"></datalist>
       </div>
       <div class="form-group">
         <label>Kecamatan</label>
-        <input
-          list="listKecamatan"
-          id="kecamatan"
-          placeholder="Ketik nama kecamatan"
-          disabled
-        />
+        <input list="listKecamatan" id="kecamatan" placeholder="Ketik nama kecamatan" disabled>
         <datalist id="listKecamatan"></datalist>
       </div>
       <div class="form-group">
         <label>Tanggal Lahir</label>
-        <input
-          type="date"
-          id="tanggalLahir"
-        />
+        <input type="date" id="tanggalLahir">
       </div>
       <div class="form-group">
         <label>Jenis Kelamin</label>
@@ -184,7 +164,7 @@
           <td id="hasilGender">-</td>
         </tr>
         <tr>
-          <td>12 Digit pertama NIK</td>
+          <td>12 Digit Pertama NIK</td>
           <td class="nik" id="hasilNik">-</td>
         </tr>
         <tr>
@@ -204,11 +184,11 @@
           <td id="hasilZodiak">-</td>
         </tr>
         <tr>
-          <td>Umur (dalam Masehi)</td>
+          <td>Umur (Masehi)</td>
           <td id="hasilUmurMasehi">-</td>
         </tr>
         <tr>
-          <td>Umur (dalam Hijriyah)</td>
+          <td>Umur (Hijriyah)</td>
           <td id="hasilUmurHijriyah">-</td>
         </tr>
         <tr>
@@ -219,177 +199,90 @@
     </div>
   </div>
   <script>
-    const BASE_URL =
-      "https://miftakhulala0.github.io/api-wilayah-indonesia/api";
-    const provinsiInput =
-      document.getElementById("provinsi");
-    const kabupatenInput =
-      document.getElementById("kabupaten");
-    const kecamatanInput =
-      document.getElementById("kecamatan");
-    const listProvinsi =
-      document.getElementById("listProvinsi");
-    const listKabupaten =
-      document.getElementById("listKabupaten");
-    const listKecamatan =
-      document.getElementById("listKecamatan");
+    const BASE_URL = "https://miftakhulala0.github.io/api-wilayah-indonesia/api";
+    const provinsiInput = document.getElementById("provinsi");
+    const kabupatenInput = document.getElementById("kabupaten");
+    const kecamatanInput = document.getElementById("kecamatan");
+    const tanggalLahirInput = document.getElementById("tanggalLahir");
+    const genderInput = document.getElementById("gender");
+    const listProvinsi = document.getElementById("listProvinsi");
+    const listKabupaten = document.getElementById("listKabupaten");
+    const listKecamatan = document.getElementById("listKecamatan");
     let provincesData = [];
     let regenciesData = [];
     let districtsData = [];
-    async function loadProvinsi(){
-      const response =
-        await fetch(
-          `${BASE_URL}/provinces.json`
-        );
-      provincesData =
-        await response.json();
+    async function loadProvinsi() {
+      const response = await fetch(`${BASE_URL}/provinces.json`);
+      provincesData = await response.json();
       listProvinsi.innerHTML = "";
       provincesData.forEach((provinsi) => {
-        const option =
-          document.createElement("option");
-        option.value =
-          provinsi.name;
+        const option = document.createElement("option");
+        option.value = provinsi.name;
         listProvinsi.appendChild(option);
       });
     }
-    async function loadKabupaten(
-      provinceId
-    ){
-      const response =
-        await fetch(
-          `${BASE_URL}/regencies/${provinceId}.json`
-        );
-      regenciesData =
-        await response.json();
+    async function loadKabupaten(provinceId) {
+      const response = await fetch(`${BASE_URL}/regencies/${provinceId}.json`);
+      regenciesData = await response.json();
       listKabupaten.innerHTML = "";
       regenciesData.forEach((kabupaten) => {
-        const option =
-          document.createElement("option");
-        option.value =
-          kabupaten.name;
+        const option = document.createElement("option");
+        option.value = kabupaten.name;
         listKabupaten.appendChild(option);
       });
       kabupatenInput.disabled = false;
     }
-    async function loadKecamatan(
-      regencyId
-    ){
-      const response =
-        await fetch(
-          `${BASE_URL}/districts/${regencyId}.json`
-        );
-      districtsData =
-        await response.json();
+    async function loadKecamatan(regencyId) {
+      const response = await fetch(`${BASE_URL}/districts/${regencyId}.json`);
+      districtsData = await response.json();
       listKecamatan.innerHTML = "";
       districtsData.forEach((kecamatan) => {
-        const option =
-          document.createElement("option");
-        option.value =
-          kecamatan.name;
+        const option = document.createElement("option");
+        option.value = kecamatan.name;
         listKecamatan.appendChild(option);
       });
       kecamatanInput.disabled = false;
     }
-    function generateNik(){
-      const provinsi =
-        provincesData.find(
-          item =>
-          item.name === provinsiInput.value
-        );
-      const kabupaten =
-        regenciesData.find(
-          item =>
-          item.name === kabupatenInput.value
-        );
-      const kecamatan =
-        districtsData.find(
-          item =>
-          item.name === kecamatanInput.value
-        );
-      const tanggalLahir =
-        document.getElementById("tanggalLahir").value;
-      const gender =
-        document.getElementById("gender").value;
-      if(
-        !provinsi ||
-        !kabupaten ||
-        !kecamatan ||
-        !tanggalLahir
-      ){
+    function generateNik() {
+      const provinsi = provincesData.find(item => item.name === provinsiInput.value);
+      const kabupaten = regenciesData.find(item => item.name === kabupatenInput.value);
+      const kecamatan = districtsData.find(item => item.name === kecamatanInput.value);
+      const tanggalLahir = tanggalLahirInput.value;
+      const gender = genderInput.value;
+      if (!provinsi || !kabupaten || !kecamatan || !tanggalLahir) {
         return;
       }
-      const kodeWilayah =
-        kecamatan.id.substring(0,6);
-      const lahir =
-        new Date(tanggalLahir);
-      const sekarang =
-        new Date();
-      let tanggal =
-        lahir.getDate();
-      const bulan =
-        lahir.getMonth() + 1;
-      const tahun =
-        lahir
-          .getFullYear()
-          .toString()
-          .slice(-2);
-      if(gender === "P"){
+      const lahir = new Date(tanggalLahir);
+      const sekarang = new Date();
+      const kodeWilayah = kecamatan.id.substring(0, 6);
+      let tanggal = lahir.getDate();
+      const bulan = lahir.getMonth() + 1;
+      const tahun = lahir.getFullYear().toString().slice(-2);
+      if (gender === "P") {
         tanggal += 40;
       }
-      const dd =
-        String(tanggal)
-          .padStart(2,"0");
-      const mm =
-        String(bulan)
-          .padStart(2,"0");
-      const nik =
-        `${kodeWilayah}${dd}${mm}${tahun}XXXX`;
-      const wilayah =
-        `${kecamatan.name},
-        ${kabupaten.name},
-        ${provinsi.name}`;
-      const hijriyahFormatter =
-        new Intl.DateTimeFormat(
-          "ar-SA-u-ca-islamic",
-          {
-            day: "numeric",
-            month: "long",
-            year: "numeric"
-          }
-        );
-      const hijriyahParts =
-        hijriyahFormatter.formatToParts(lahir);
-      const bulanHijriyahMap = {
-        "محرم": "Muharram",
-        "صفر": "Safar",
-        "ربيع الأول": "Rabiul Awal",
-        "ربيع الآخر": "Rabiul Akhir",
-        "جمادى الأولى": "Jumadil Awal",
-        "جمادى الآخرة": "Jumadil Akhir",
-        "رجب": "Rajab",
-        "شعبان": "Syaban",
-        "رمضان": "Ramadhan",
-        "شوال": "Syawal",
-        "ذو القعدة": "Dzulqa'dah",
-        "ذو الحجة": "Dzulhijjah"
-      };
-      let hariHijriyah = "";
-      let bulanHijriyahText = "";
-      let tahunHijriyahText = "";
-      hijriyahParts.forEach(part => {
-        if(part.type === "day"){
-          hariHijriyah = part.value;
+      const dd = String(tanggal).padStart(2, "0");
+      const mm = String(bulan).padStart(2, "0");
+      const nik = `${kodeWilayah}${dd}${mm}${tahun}XXXX`;
+      const wilayah = `${kecamatan.name}, ${kabupaten.name}, ${provinsi.name}`;
+      const tanggalHijriyahDate = new Date(
+        lahir.getFullYear(),
+        lahir.getMonth(),
+        lahir.getDate(),
+        12,
+        0,
+        0
+      );
+      const hijriyahFormatter = new Intl.DateTimeFormat(
+        "id-ID-u-ca-islamic-civil",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          timeZone: "Asia/Jakarta"
         }
-        if(part.type === "month"){
-          bulanHijriyahText =
-            bulanHijriyahMap[part.value] || part.value;
-        }
-        if(part.type === "year"){
-          tahunHijriyahText = part.value;
-        }
-      });
-      const hijriyah =
-        `${hariHijriyah} ${bulanHijriyahText} ${tahunHijriyahText} H`;
+      );
+      const hijriyah = hijriyahFormatter.format(tanggalHijriyahDate);
       const namaHari = [
         "Minggu",
         "Senin",
@@ -399,8 +292,7 @@
         "Jumat",
         "Sabtu"
       ];
-      const hariLahir =
-        namaHari[lahir.getDay()];
+      const hariLahir = namaHari[lahir.getDay()];
       const pasaran = [
         "Legi",
         "Pahing",
@@ -408,20 +300,11 @@
         "Wage",
         "Kliwon"
       ];
-      const baseDate =
-        new Date("1938-01-01");
-      const selisihHari =
-        Math.floor(
-          (lahir - baseDate) / 86400000
-        );
-      const hasilPasaran =
-        pasaran[
-          ((selisihHari % 5) + 5) % 5
-        ];
-      const tgl =
-        lahir.getDate();
-      const bln =
-        lahir.getMonth() + 1;
+      const baseDate = new Date("1938-01-01");
+      const selisihHari = Math.floor((lahir - baseDate) / 86400000);
+      const hasilPasaran = pasaran[((selisihHari % 5) + 5) % 5];
+      const tgl = lahir.getDate();
+      const bln = lahir.getMonth() + 1;
       let zodiak = "";
       if ((bln == 1 && tgl >= 20) || (bln == 2 && tgl <= 18)) zodiak = "Aquarius";
       else if ((bln == 2 && tgl >= 19) || (bln == 3 && tgl <= 20)) zodiak = "Pisces";
@@ -435,176 +318,108 @@
       else if ((bln == 10 && tgl >= 23) || (bln == 11 && tgl <= 21)) zodiak = "Scorpio";
       else if ((bln == 11 && tgl >= 22) || (bln == 12 && tgl <= 21)) zodiak = "Sagitarius";
       else zodiak = "Capricorn";
-      let tahunUmur =
-        sekarang.getFullYear() -
-        lahir.getFullYear();
-      let bulanUmur =
-        sekarang.getMonth() -
-        lahir.getMonth();
-      let hariUmur =
-        sekarang.getDate() -
-        lahir.getDate();
-      if(hariUmur < 0){
+      let tahunUmur = sekarang.getFullYear() - lahir.getFullYear();
+      let bulanUmur = sekarang.getMonth() - lahir.getMonth();
+      let hariUmur = sekarang.getDate() - lahir.getDate();
+      if (hariUmur < 0) {
         bulanUmur--;
-        const lastMonth =
-          new Date(
-            sekarang.getFullYear(),
-            sekarang.getMonth(),
-            0
-          ).getDate();
+        const lastMonth = new Date(
+          sekarang.getFullYear(),
+          sekarang.getMonth(),
+          0
+        ).getDate();
         hariUmur += lastMonth;
       }
-      if(bulanUmur < 0){
+      if (bulanUmur < 0) {
         tahunUmur--;
         bulanUmur += 12;
       }
-      const totalHari =
-        Math.floor(
-          (sekarang - lahir) / 86400000
-        );
-      const tahunHijriyah =
-        Math.floor(totalHari / 354.367);
-      const sisaHari1 =
-        totalHari % 354.367;
-      const bulanHijriyah =
-        Math.floor(sisaHari1 / 29.53);
-      const hariHijriyah =
-        Math.floor(sisaHari1 % 29.53);
-      let ultahBerikutnya =
-        new Date(
-          sekarang.getFullYear(),
-          lahir.getMonth(),
-          lahir.getDate()
-        );
-      if(ultahBerikutnya < sekarang){
-        ultahBerikutnya.setFullYear(
-          sekarang.getFullYear() + 1
-        );
+      const totalHari = Math.floor((sekarang - lahir) / 86400000);
+      const tahunHijriyahUmur = Math.floor(totalHari / 354.367);
+      const sisaHari1 = totalHari % 354.367;
+      const bulanHijriyahUmur = Math.floor(sisaHari1 / 29.53);
+      const hariHijriyahUmur = Math.floor(sisaHari1 % 29.53);
+      let ultahBerikutnya = new Date(
+        sekarang.getFullYear(),
+        lahir.getMonth(),
+        lahir.getDate()
+      );
+      ultahBerikutnya.setHours(0, 0, 0, 0);
+      const sekarangHariMurni = new Date(
+        sekarang.getFullYear(),
+        sekarang.getMonth(),
+        sekarang.getDate()
+      );
+      if (ultahBerikutnya < sekarangHariMurni) {
+        ultahBerikutnya.setFullYear(sekarang.getFullYear() + 1);
       }
-      const selisihMs =
-        ultahBerikutnya - sekarang;
-      const totalHariUltah =
-        Math.ceil(
-          selisihMs / 86400000
-        );
-      const bulanUltah =
-        Math.floor(totalHariUltah / 30);
-      const hariUltah =
-        totalHariUltah % 30;
+      let bulanUltah = ultahBerikutnya.getMonth() - sekarangHariMurni.getMonth();
+      let hariUltahFix = ultahBerikutnya.getDate() - sekarangHariMurni.getDate();
+      if (hariUltahFix < 0) {
+        bulanUltah--;
+        const hariBulanLalu = new Date(
+          ultahBerikutnya.getFullYear(),
+          ultahBerikutnya.getMonth(),
+          0
+        ).getDate();
+        hariUltahFix += hariBulanLalu;
+      }
+      if (bulanUltah < 0) {
+        bulanUltah += 12;
+      }
       let teksUltah = "";
-      if(bulanUltah > 0){
-        teksUltah =
-          `${bulanUltah} bulan ${hariUltah} hari lagi`;
+      if (bulanUltah === 0 && hariUltahFix === 0) {
+        teksUltah = "Selamat Ulang Tahun! 🎉 Hari ini!";
+      } else if (bulanUltah > 0) {
+        teksUltah = `${bulanUltah} bulan ${hariUltahFix} hari lagi`;
+      } else {
+        teksUltah = `${hariUltahFix} hari lagi`;
       }
-      else{
-        teksUltah =
-          `${hariUltah} hari lagi`;
-      }
-      document.getElementById(
-        "hasilWilayah"
-      ).textContent =
-        wilayah;
-      document.getElementById(
-        "hasilTanggal"
-      ).textContent =
-        tanggalLahir;
-      document.getElementById(
-        "hasilGender"
-      ).textContent =
-        gender === "L"
-        ? "Laki-laki"
-        : "Perempuan";
-      document.getElementById(
-        "hasilNik"
-      ).textContent =
-        nik;
-      document.getElementById(
-        "hasilHijriyah"
-      ).textContent =
-        hijriyah;
-      document.getElementById(
-        "hasilHari"
-      ).textContent =
-        hariLahir;
-      document.getElementById(
-        "hasilPasaran"
-      ).textContent =
-        hasilPasaran;
-      document.getElementById(
-        "hasilZodiak"
-      ).textContent =
-        zodiak;
-      document.getElementById(
-        "hasilUmurMasehi"
-      ).textContent =
-        `${tahunUmur} Tahun,
-        ${bulanUmur} Bulan,
-        ${hariUmur} Hari`;
-      document.getElementById(
-        "hasilUmurHijriyah"
-      ).textContent =
-        `${tahunHijriyah} Tahun,
-        ${bulanHijriyah} Bulan,
-        ${hariHijriyah} Hari`;
-      document.getElementById(
-        "hasilUltah"
-      ).textContent =
-        teksUltah;
+      document.getElementById("hasilWilayah").textContent = wilayah;
+      const tanggalIndonesia = new Intl.DateTimeFormat(
+        "id-ID",
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }
+      ).format(lahir);
+      document.getElementById("hasilTanggal").textContent = tanggalIndonesia;
+      document.getElementById("hasilGender").textContent = gender === "L" ? "Laki-laki" : "Perempuan";
+      document.getElementById("hasilNik").textContent = nik;
+      document.getElementById("hasilHijriyah").textContent = hijriyah;
+      document.getElementById("hasilHari").textContent = hariLahir;
+      document.getElementById("hasilPasaran").textContent = hasilPasaran;
+      document.getElementById("hasilZodiak").textContent = zodiak;
+      document.getElementById("hasilUmurMasehi").textContent = `${tahunUmur} Tahun, ${bulanUmur} Bulan, ${hariUmur} Hari`;
+      document.getElementById("hasilUmurHijriyah").textContent = `${tahunHijriyahUmur} Tahun, ${bulanHijriyahUmur} Bulan, ${hariHijriyahUmur} Hari`;
+      document.getElementById("hasilUltah").textContent = teksUltah;
     }
     provinsiInput.addEventListener(
       "change",
-      async function(){
-        const provinsi =
-          provincesData.find(
-            item =>
-            item.name === this.value
-          );
+      async function() {
+        const provinsi = provincesData.find(item => item.name === this.value);
         kabupatenInput.value = "";
         kecamatanInput.value = "";
         kabupatenInput.disabled = true;
         kecamatanInput.disabled = true;
-        if(!provinsi){
-          return;
-        }
-        await loadKabupaten(
-          provinsi.id
-        );
+        if (!provinsi) return;
+        await loadKabupaten(provinsi.id);
       }
     );
     kabupatenInput.addEventListener(
       "change",
-      async function(){
-        const kabupaten =
-          regenciesData.find(
-            item =>
-            item.name === this.value
-          );
+      async function() {
+        const kabupaten = regenciesData.find(item => item.name === this.value);
         kecamatanInput.value = "";
         kecamatanInput.disabled = true;
-        if(!kabupaten){
-          return;
-        }
-        await loadKecamatan(
-          kabupaten.id
-        );
+        if (!kabupaten) return;
+        await loadKecamatan(kabupaten.id);
       }
     );
-    kecamatanInput.addEventListener(
-      "change",
-      generateNik
-    );
-    document.getElementById(
-      "tanggalLahir"
-    ).addEventListener(
-      "change",
-      generateNik
-    );
-    document.getElementById(
-      "gender"
-    ).addEventListener(
-      "change",
-      generateNik
-    );
+    kecamatanInput.addEventListener("change", generateNik);
+    tanggalLahirInput.addEventListener("change", generateNik);
+    genderInput.addEventListener("change", generateNik);
     loadProvinsi();
   </script>
 </body>
