@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Generator NIK Simulasi</title>
+  <title>Generator Nomor Induk Kependudukan</title>
   <style>
     * {
       box-sizing: border-box;
@@ -119,7 +119,7 @@
     <div class="input-box">
       <h2>Input</h2>
       <div class="info">
-        Isi data sesuai data kelahiran agar hasil simulasi sesuai wilayah administrasi dan format NIK Indonesia.
+        Isi data sesuai data administrasi kependudukan agar hasil sesuai dengan format NIK Indonesia.
       </div>
       <div class="form-group">
         <label>Provinsi</label>
@@ -265,25 +265,37 @@
       const mm = String(bulan).padStart(2, "0");
       const nik = `${kodeWilayah}${dd}${mm}${tahun}XXXX`;
       const wilayah = `${kecamatan.name}, ${kabupaten.name}, ${provinsi.name}`;
-      const tanggalHijriyahDate = new Date(
-        lahir.getFullYear(),
-        lahir.getMonth(),
-        lahir.getDate(),
-        12,
-        0,
-        0
-      );
-      const hijriyahFormatter = new Intl.DateTimeFormat(
-        "id-ID",
-        {
-          calendar: "islamic-civil",
+      const tanggalHijriyahDate = new Date(Date.UTC(lahir.getFullYear(), lahir.getMonth(), lahir.getDate()));
+      let hijriyah = "-";
+      try {
+        const hijriyahFormatter = new Intl.DateTimeFormat("id-ID-u-ca-islamic-umalqura", {
           day: "numeric",
           month: "long",
           year: "numeric",
-          timeZone: "Asia/Jakarta"
+          timeZone: "UTC"
+        });
+        hijriyah = hijriyahFormatter.format(tanggalHijriyahDate);
+        const formatMasehiCek = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(lahir);
+        if (hijriyah.includes(formatMasehiCek) || hijriyah.includes("SM")) {
+          throw new Error("Mobile bug Intl detected");
         }
-      );
-      const hijriyah = hijriyahFormatter.format(tanggalHijriyahDate);
+      } catch (e) {
+        const jd = Math.floor((tanggalHijriyahDate.getTime() / 86400000) + 2440587.5);
+        const l = jd - 1948440 + 10632;
+        const n = Math.floor((l - 1) / 10631);
+        let sisa = l - 10631 * n + 354;
+        const j = Math.floor((10985 - sisa) / 5316) * Math.floor((50 * sisa) / 17719) + Math.floor(sisa / 5670) * Math.floor((43 * sisa) / 15238);
+        sisa = sisa - Math.floor((30 - j) / 15) * Math.floor((17719 * j) / 50) - Math.floor(j / 16) * Math.floor((15238 * j) / 43);
+        const m = Math.floor((24 * sisa - 29) / 709);
+        const d = sisa - Math.floor((709 * m + 30) / 24);
+        const y = 30 * n + j - 30;
+        const bulanHijriyahIndo = [
+          "Muharram", "Safar", "Rabiul Awwal", "Rabiul Akhir", 
+          "Jumadil Awwal", "Jumadil Akhir", "Rajab", "Sya'ban", 
+          "Ramadhan", "Syawwal", "Dzulqa'dah", "Dzulhijjah"
+        ]; 
+        hijriyah = `${d} ${bulanHijriyahIndo[m - 1]} ${y} H`;
+      }
       const namaHari = [
         "Minggu",
         "Senin",
@@ -321,7 +333,7 @@
       else zodiak = "Capricorn";
       let tahunUmur = sekarang.getFullYear() - lahir.getFullYear();
       let bulanUmur = sekarang.getMonth() - lahir.getMonth();
-      let hariUmur = sekarang.getDate() - lahir.getDate();
+      let hariUmur = Bird = sekarang.getDate() - lahir.getDate();
       if (hariUmur < 0) {
         bulanUmur--;
         const lastMonth = new Date(
@@ -390,7 +402,7 @@
       document.getElementById("hasilNik").textContent = nik;
       document.getElementById("hasilHijriyah").textContent = hijriyah;
       document.getElementById("hasilHari").textContent = hariLahir;
-      document.getElementById("hasilPasaran").textContent = hasilPasaran;
+      document.getElementById("hasilPasaran").textContent = pasaran[((selisihHari % 5) + 5) % 5];
       document.getElementById("hasilZodiak").textContent = zodiak;
       document.getElementById("hasilUmurMasehi").textContent = `${tahunUmur} Tahun, ${bulanUmur} Bulan, ${hariUmur} Hari`;
       document.getElementById("hasilUmurHijriyah").textContent = `${tahunHijriyahUmur} Tahun, ${bulanHijriyahUmur} Bulan, ${hariHijriyahUmur} Hari`;
