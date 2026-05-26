@@ -274,8 +274,9 @@
         0
       );
       const hijriyahFormatter = new Intl.DateTimeFormat(
-        "id-ID-u-ca-islamic-civil",
+        "id-ID",
         {
+          calendar: "islamic-civil",
           day: "numeric",
           month: "long",
           year: "numeric",
