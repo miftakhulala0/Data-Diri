@@ -272,7 +272,6 @@
         12,
         0,
         0
-      );
       const hijriyahFormatter = new Intl.DateTimeFormat(
         "id-ID-u-ca-islamic-civil",
         {
@@ -290,12 +289,14 @@
       ];
       const formatMasehiCek = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(lahir);
       if (hijriyah.includes(formatMasehiCek) || hijriyah.includes("SM")) {
-        const tglHijriyahMurni = tanggalHijriyahDate.getDate(); 
-        const bulanIndex = tanggalHijriyahDate.getMonth(); 
-        const namaBulanHijriyah = bulanHijriyahCustom[bulanIndex];
-        // Ambil nilai angka tahun murni, lalu bubuhkan akhiran "H" secara manual
-        const tahunHijriyahMurni = tanggalHijriyahDate.getFullYear();
-        hijriyah = `${tglHijriyahMurni} ${namaBulanHijriyah} ${tahunHijriyahMurni} H`;
+        const matches = hijriyah.match(/\d+/g); 
+        if (matches && matches.length >= 2) {
+          const tglHijriyahMurni = matches[0];
+          const tahunHijriyahMurni = matches[matches.length - 1];
+          const bulanIndex = lahir.getMonth(); 
+          const namaBulanHijriyah = bulanHijriyahCustom[bulanIndex];
+          hijriyah = `${tglHijriyahMurni} ${namaBulanHijriyah} ${tahunHijriyahMurni} H`;
+        }
       }
       const namaHari = [
         "Minggu",
@@ -388,7 +389,6 @@
         teksUltah = `${bulanUltah} bulan ${hariUltahFix} hari lagi`;
       } else {
         teksUltah = `${hariUltahFix} hari lagi`;
-      }
       document.getElementById("hasilWilayah").textContent = wilayah;
       const tanggalIndonesia = new Intl.DateTimeFormat(
         "id-ID",
