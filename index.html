@@ -119,7 +119,7 @@
     <div class="input-box">
       <h2>Input</h2>
       <div class="info">
-        Isi data sesuai data kelahiran agar hasil simulasi sesuai wilayah administrasi dan format NIK Indonesia.
+        Isi data sesuai data kelahiran agar hasil simulasi sesuai wilayah administrasi and format NIK Indonesia.
       </div>
       <div class="form-group">
         <label>Provinsi</label>
@@ -272,6 +272,7 @@
         12,
         0,
         0
+      );
       const hijriyahFormatter = new Intl.DateTimeFormat(
         "id-ID-u-ca-islamic-civil",
         {
@@ -289,10 +290,10 @@
       ];
       const formatMasehiCek = new Intl.DateTimeFormat("id-ID", { month: "long" }).format(lahir);
       if (hijriyah.includes(formatMasehiCek) || hijriyah.includes("SM")) {
-        const matches = hijriyah.match(/\d+/g); 
+        const matches = hijriyah.match(/\d+/g);
         if (matches && matches.length >= 2) {
           const tglHijriyahMurni = matches[0];
-          const tahunHijriyahMurni = matches[matches.length - 1];
+          const tahunHijriyahMurni = matches[1];
           const bulanIndex = lahir.getMonth(); 
           const namaBulanHijriyah = bulanHijriyahCustom[bulanIndex];
           hijriyah = `${tglHijriyahMurni} ${namaBulanHijriyah} ${tahunHijriyahMurni} H`;
@@ -389,6 +390,7 @@
         teksUltah = `${bulanUltah} bulan ${hariUltahFix} hari lagi`;
       } else {
         teksUltah = `${hariUltahFix} hari lagi`;
+      }
       document.getElementById("hasilWilayah").textContent = wilayah;
       const tanggalIndonesia = new Intl.DateTimeFormat(
         "id-ID",
